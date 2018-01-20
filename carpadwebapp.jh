@@ -1,0 +1,87 @@
+entity State {
+	id Long,
+    stateTitle String,
+    stateCode String
+}
+
+entity Country {
+    id Long,
+	countryName String,
+    countryCode String
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity City {
+	id String,
+	cityTitle String,
+	cityCode String
+}
+
+entity StationType {
+	id Long,
+    stationTypeTitle String,
+    versionOfSubStationType Float,
+    description String,
+    stationTypeCode String,
+    subStationTypes List,
+    parent StationType
+}
+
+entity Stationn {
+    id Long,
+    stationTitle String,
+    subscriptionCode String,
+    latitude Double,
+    longitude Double,
+    managerName String,
+    mobileNumber String,
+    zone Integer,
+    description String,
+    phoneNo String,
+    stateOfStation StateOfStation,
+    weight Integer
+}
+
+
+enum StateOfStation {
+    ACTIVE, DEACTIVE, OPEN, CLOSE
+}
+
+
+
+
+
+
+
+//relationship ManyToMany {
+	//Job{task(title)} to Task{job}
+//}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	
+    Country{state} to State
+    State{city} to City
+    City{stationn} to Stationn
+}
+
+relationship ManyToOne {
+	StationType{stationType} to Stationn
+}
+
+// defining multiple oneToOne relationships
+//relationship OneToOne {
+
+//}
+
+// Set pagination options
+//paginate JobHistory, Employee with infinite-scroll
+//paginate Job with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+//service all with serviceImpl except Employee, Job
+// Set an angular suffix
+angularSuffix * with mySuffix
